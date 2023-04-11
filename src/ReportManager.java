@@ -5,9 +5,8 @@ public class ReportManager {
     public ArrayList<MonthlyReport> monthlyReports;
     public YearlyReport yearlyReport;
 
+
     public void check(ArrayList<MonthlyReport> monthlyReports, YearlyReport yearlyReport) {
-        this.monthlyReports = monthlyReports;
-        this.yearlyReport = yearlyReport;
 
         //Приводим помесячную статистику в удобный для сравнения формат
         HashMap<String, Integer> monthsProfit = new HashMap<>();
@@ -22,7 +21,7 @@ public class ReportManager {
         //Приводим годовую статистику в удобный для сравнения формат
         HashMap<String, Integer> yearProfit = new HashMap<>();
         HashMap<String, Integer> yearExpenses = new HashMap<>();
-        String[] months = {"Январь", "Ферваль", "Март", "Апрель", " Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
+        String[] months = {"Январь", "Февраль", "Март", "Апрель", " Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
         HashMap<Integer, String> monthNames = new HashMap<>();
         for (int i = 0; i < 12; i++) {
             monthNames.put(i + 1, months[i]);
@@ -44,13 +43,15 @@ public class ReportManager {
         boolean checkFailed = false;
         boolean monthCheckFailed = false;
 
-        for (String month : monthsProfit.keySet()) {
-            if (monthsProfit.get(month) != yearProfit.get(month)) {
-                checkFailed = true;
-                monthCheckFailed = true;
-            } else if (monthsExpenses.get(month) != yearExpenses.get(month)) {
-                checkFailed = true;
-                monthCheckFailed = true;
+        for (String month : months) {
+            if (monthsProfit.containsKey(month) && monthsExpenses.containsKey(month)) {
+                if (monthsProfit.get(month).intValue() != yearProfit.get(month).intValue()) {
+                    checkFailed = true;
+                    monthCheckFailed = true;
+                } else if (monthsExpenses.get(month).intValue() != yearExpenses.get(month).intValue()) {
+                    checkFailed = true;
+                    monthCheckFailed = true;
+                }
             }
             if (monthCheckFailed) {
                 System.out.println("Обнаружены расхождения между месячным и годовым отчетом в месяце - " + month);

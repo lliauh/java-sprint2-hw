@@ -11,9 +11,6 @@ public class Main {
         MonthlyReport februaryReport = new MonthlyReport();
         MonthlyReport marchReport = new MonthlyReport();
         ArrayList<MonthlyReport> monthlyReports = new ArrayList<>();
-        monthlyReports.add(januaryReport);
-        monthlyReports.add(februaryReport);
-        monthlyReports.add(marchReport);
 
         YearlyReport yearlyReport = new YearlyReport();
 
@@ -34,6 +31,10 @@ public class Main {
                 januaryReport = new MonthlyReport("resources/m.202101.csv", months.get("january"));
                 februaryReport = new MonthlyReport("resources/m.202102.csv", months.get("february"));
                 marchReport = new MonthlyReport("resources/m.202103.csv", months.get("march"));
+                monthlyReports = new ArrayList<>();
+                monthlyReports.add(januaryReport);
+                monthlyReports.add(februaryReport);
+                monthlyReports.add(marchReport);
                 monthsDataLoaded = true;
                 System.out.println("Месячные отчёты были успешно считаны.");
             } else if (command == 2) {
@@ -64,7 +65,7 @@ public class Main {
                 System.out.println("Работа приложения завершена.");
                 break;
             } else {
-                System.out.println("Введена неподдерживаемая комманда. Попробуйте снова.");
+                System.out.println("Введена неподдерживаемая команда. Попробуйте снова.");
             }
         }
     }
