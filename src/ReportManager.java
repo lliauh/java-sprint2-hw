@@ -69,14 +69,13 @@ public class ReportManager {
 
     public void getMonthStatistics(MonthlyReport monthlyReport) {
         HashMap<String, Integer> profitableProducts = new HashMap<>();
-        HashMap<String, Integer> unprofitableProducts = new HashMap<>();
+        for (MonthExpense monthExpense : monthlyReport.profit) {
+            profitableProducts.put(monthExpense.title, profitableProducts.getOrDefault("monthExpense", 0) + monthExpense.totalPrice);
+        }
 
-        for (MonthExpense monthExpense : monthlyReport.monthExpenses) {
-            if (monthExpense.isExpense) {
-                unprofitableProducts.put(monthExpense.title, unprofitableProducts.getOrDefault("monthExpense", 0) + monthExpense.totalPrice);
-            } else {
-                profitableProducts.put(monthExpense.title, profitableProducts.getOrDefault("monthExpense", 0) + monthExpense.totalPrice);
-            }
+        HashMap<String, Integer> unprofitableProducts = new HashMap<>();
+        for (MonthExpense monthExpense: monthlyReport.expenses) {
+            unprofitableProducts.put(monthExpense.title, profitableProducts.getOrDefault("monthExpense", 0) + monthExpense.totalPrice);
         }
 
         String maxProfitTitle = null;

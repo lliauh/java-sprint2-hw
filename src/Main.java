@@ -7,10 +7,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        MonthlyReport januaryReport = new MonthlyReport();
-        MonthlyReport februaryReport = new MonthlyReport();
-        MonthlyReport marchReport = new MonthlyReport();
-        ArrayList<MonthlyReport> monthlyReports = new ArrayList<>();
+        MonthlyReport januaryReport = null;
+        MonthlyReport februaryReport = null;
+        MonthlyReport marchReport = null;
+        ArrayList<MonthlyReport> monthlyReports = null;
+
 
         YearlyReport yearlyReport = new YearlyReport();
 

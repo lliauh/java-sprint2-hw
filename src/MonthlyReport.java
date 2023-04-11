@@ -7,7 +7,6 @@ import java.util.List;
 
 public class MonthlyReport {
     String month;
-    ArrayList<MonthExpense> monthExpenses = new ArrayList<>();
     ArrayList<MonthExpense> expenses = new ArrayList<>();
     ArrayList<MonthExpense> profit = new ArrayList<>();
 
@@ -17,14 +16,6 @@ public class MonthlyReport {
     public MonthlyReport(String path, String month) {
         this.month = month;
         loadFile(path, month);
-
-        for (MonthExpense monthExpense : monthExpenses) {
-            if (monthExpense.isExpense) {
-                expenses.add(monthExpense);
-            } else {
-                profit.add(monthExpense);
-            }
-        }
     }
 
     public int calculateTotalProfit() {
@@ -54,8 +45,11 @@ public class MonthlyReport {
             int itemPrice = Integer.parseInt(parts[3]);
 
             MonthExpense monthExpense = new MonthExpense(title, isExpense, quantity, itemPrice, month);
-            monthExpenses.add(monthExpense);
-
+            if (monthExpense.isExpense) {
+                expenses.add(monthExpense);
+            } else {
+                profit.add(monthExpense);
+            }
         }
     }
     List<String> readFileContents(String path) {
